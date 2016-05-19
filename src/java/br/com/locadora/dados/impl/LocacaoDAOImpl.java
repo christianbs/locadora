@@ -9,6 +9,7 @@ import br.com.locadora.util.ConexaoJavaDb;
 import br.com.locadora.dados.LocacaoDAO;
 import br.com.locadora.entidade.Locacao;
 import br.com.locadora.excessao.ExcecaoAcessoDados;
+import br.com.locadora.util.Conexao;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Date;
@@ -19,7 +20,7 @@ import java.util.Date;
  */
 public class LocacaoDAOImpl implements LocacaoDAO {
 
-    private ConexaoJavaDb conexao;
+    private final Conexao conexao;
 
     public LocacaoDAOImpl() {
         conexao = new ConexaoJavaDb("root", "102030", "localhost", 1527, "locadora");
@@ -39,14 +40,6 @@ public class LocacaoDAOImpl implements LocacaoDAO {
         } catch (SQLException e) {
             throw new ExcecaoAcessoDados(e);
         }
-    }
-
-    public ConexaoJavaDb getConexao() {
-        return conexao;
-    }
-
-    public void setConexao(ConexaoJavaDb conexao) {
-        this.conexao = conexao;
     }
 
 }
