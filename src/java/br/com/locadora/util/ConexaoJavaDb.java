@@ -13,7 +13,7 @@ import java.sql.SQLException;
  *
  * @author christian
  */
-public class ConexaoJavaDb implements ConexaoInterface {
+public class ConexaoJavaDb implements Conexao {
 
     private final String usuario;
     private final String senha;

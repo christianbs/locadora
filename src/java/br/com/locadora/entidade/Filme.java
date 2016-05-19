@@ -1,19 +1,29 @@
-
 package br.com.locadora.entidade;
 
+import java.util.Objects;
+
 public class Filme {
+
+    private long id;
+    private int ano;
     private String titulo;
     private String diretor;
-    private int ano;
     private String categoria;
-    
-    public Filme (){};
-    
-    public Filme (String titulo, String diretor, int ano, String categoria){
-        this.titulo = titulo;
-        this.diretor = diretor;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public int getAno() {
+        return ano;
+    }
+
+    public void setAno(int ano) {
         this.ano = ano;
-        this.categoria = categoria;
     }
 
     public String getTitulo() {
@@ -32,14 +42,6 @@ public class Filme {
         this.diretor = diretor;
     }
 
-    public int getAno() {
-        return ano;
-    }
-
-    public void setAno(int ano) {
-        this.ano = ano;
-    }
-
     public String getCategoria() {
         return categoria;
     }
@@ -47,6 +49,46 @@ public class Filme {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
-    
-    
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 59 * hash + this.ano;
+        hash = 59 * hash + Objects.hashCode(this.titulo);
+        hash = 59 * hash + Objects.hashCode(this.diretor);
+        hash = 59 * hash + Objects.hashCode(this.categoria);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Filme other = (Filme) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (this.ano != other.ano) {
+            return false;
+        }
+        if (!Objects.equals(this.titulo, other.titulo)) {
+            return false;
+        }
+        if (!Objects.equals(this.diretor, other.diretor)) {
+            return false;
+        }
+        if (!Objects.equals(this.categoria, other.categoria)) {
+            return false;
+        }
+        return true;
+    }
+
 }
