@@ -13,8 +13,6 @@ import br.com.locadora.excessao.ExcecaoAcessoDados;
 import br.com.locadora.excessao.ExcecaoNegocio;
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
