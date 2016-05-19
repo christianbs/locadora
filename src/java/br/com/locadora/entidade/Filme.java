@@ -1,5 +1,5 @@
 
-package br.com.locadora.util;
+package br.com.locadora.entidade;
 
 public class Filme {
     private String titulo;

@@ -5,8 +5,6 @@ package br.com.locadora.util;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -17,11 +15,11 @@ import java.sql.SQLException;
  */
 public class ConexaoJavaDb implements ConexaoInterface {
 
-    private String usuario;
-    private String senha;
-    private String hostname;
-    private int porta;
-    private String nomeBancoDeDados;
+    private final String usuario;
+    private final String senha;
+    private final String hostname;
+    private final int porta;
+    private final String nomeBancoDeDados;
     private Connection conexao;
 
     public ConexaoJavaDb(String usuario, String senha, String hostname, int porta, String nomeBancoDeDados) {
