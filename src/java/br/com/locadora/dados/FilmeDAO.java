@@ -6,6 +6,7 @@
 package br.com.locadora.dados;
 
 import br.com.locadora.entidade.Filme;
+import br.com.locadora.excessao.ExcecaoAcessoDados;
 import java.util.List;
 
 /**
@@ -14,6 +15,6 @@ import java.util.List;
  */
 public interface FilmeDAO {
 
-    List<Filme> listar();
+    List<Filme> listar() throws ExcecaoAcessoDados;
 
 }

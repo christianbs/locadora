@@ -5,7 +5,7 @@
  */
 package br.com.locadora.entidade;
 
-import br.com.locadora.util.EstadoConservacao;
+import br.com.locadora.constante.EstadoConservacao;
 import java.util.Objects;
 
 /**

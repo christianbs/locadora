@@ -7,8 +7,13 @@ package br.com.locadora.dados.impl;
 
 import br.com.locadora.dados.FilmeDAO;
 import br.com.locadora.entidade.Filme;
+import br.com.locadora.excessao.ExcecaoAcessoDados;
 import br.com.locadora.util.Conexao;
 import br.com.locadora.util.ConexaoJavaDb;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,8 +29,25 @@ public class FilmeDAOImpl implements FilmeDAO {
     }
 
     @Override
-    public List<Filme> listar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Filme> listar() throws ExcecaoAcessoDados {
+        try {
+            List<Filme> filmes = new ArrayList();
+            String sql = "select * from filme";
+            Statement st = conexao.getConnection().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                Filme filme = new Filme();
+                filme.setAno(rs.getDate("ano").getYear());
+                filme.setCategoria(rs.getString("categoria"));
+                filme.setDiretor(rs.getString("diretor"));
+                filme.setId(rs.getLong("id"));
+                filme.setTitulo(rs.getString("titulo"));
+                filmes.add(filme);
+            }
+            return filmes;
+        } catch (SQLException ex) {
+            throw new ExcecaoAcessoDados(ex);
+        }
     }
 
 }

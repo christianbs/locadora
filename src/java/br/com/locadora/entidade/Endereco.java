@@ -5,7 +5,7 @@
  */
 package br.com.locadora.entidade;
 
-import br.com.locadora.util.Estado;
+import br.com.locadora.constante.Estado;
 import java.io.Serializable;
 import java.util.Objects;
 

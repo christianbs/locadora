@@ -5,11 +5,17 @@
  */
 package br.com.locadora.dados.impl;
 
+import br.com.locadora.constante.EstadoConservacao;
 import br.com.locadora.dados.DiscoDAO;
 import br.com.locadora.entidade.Disco;
 import br.com.locadora.entidade.Filme;
+import br.com.locadora.excessao.ExcecaoAcessoDados;
 import br.com.locadora.util.Conexao;
 import br.com.locadora.util.ConexaoJavaDb;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,16 +23,33 @@ import java.util.List;
  * @author christian
  */
 public class DiscoDAOImpl implements DiscoDAO {
-
+    
     private final Conexao conexao;
-
+    
     public DiscoDAOImpl() {
         conexao = new ConexaoJavaDb("root", "102030", "localhost", 1527, "locadora");
     }
-
+    
     @Override
-    public List<Disco> listarPorFilme(Filme filme) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Disco> listarPorFilme(Filme filme) throws ExcecaoAcessoDados {
+        List<Disco> discos = new ArrayList();
+        String sql = "select * from disco where id_filme = ?";
+        try {
+            PreparedStatement ps = conexao.getConnection().prepareStatement(sql);
+            ps.setLong(1, filme.getId());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Disco disco = new Disco();
+                disco.setId(rs.getLong("id"));
+                disco.setFilme(filme);
+                disco.setEstado(EstadoConservacao.recuperarEstadoConservacao(rs.getString("estado")));
+                disco.setAlocado(rs.getBoolean("alocado"));
+                discos.add(disco);
+            }
+        } catch (SQLException ex) {
+            throw new ExcecaoAcessoDados(ex);
+        }
+        return discos;
     }
-
+    
 }
