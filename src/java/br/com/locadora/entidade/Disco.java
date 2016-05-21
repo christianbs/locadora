@@ -18,6 +18,7 @@ public class Disco {
     private boolean alocado;
     private Filme filme;
     private EstadoConservacao estado;
+    private int id_filme;
 
     public long getId() {
         return id;

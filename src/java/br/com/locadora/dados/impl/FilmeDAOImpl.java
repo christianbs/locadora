@@ -49,5 +49,22 @@ public class FilmeDAOImpl implements FilmeDAO {
             throw new ExcecaoAcessoDados(ex);
         }
     }
+    @Override
+    public Filme buscarPeloId(long id) throws ExcecaoAcessoDados {
+        Filme filme = null;
+        try{
+            String sql = "select * from filme WHERE id=?";
+            Statement st = conexao.getConnection().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            filme.setId(rs.getLong("id"));
+            filme.setAno(rs.getDate("ano").getYear());
+            filme.setCategoria(rs.getString("categoria"));
+            filme.setDiretor(rs.getString("diretor"));
+            filme.setTitulo(rs.getString("titulo"));
+        return filme;
+        }catch (SQLException ex) {
+            throw new ExcecaoAcessoDados(ex);
+        }
+    }
 
 }

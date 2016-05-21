@@ -16,5 +16,6 @@ import java.util.List;
 public interface FilmeDAO {
 
     List<Filme> listar() throws ExcecaoAcessoDados;
+    Filme buscarPeloId(long id) throws ExcecaoAcessoDados;
 
 }

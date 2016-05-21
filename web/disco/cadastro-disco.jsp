@@ -13,10 +13,12 @@ and open the template in the editor.
     <body>
     <center>
         <h1>Cadastro de disco</h1>
-        <form method="POST" action="">
+        <form method="POST" action="/CadDiscoServlet">
             <div><label>id do filme:</label><input type="text" name="id_filme"/></div>
-            <div><label>estado:</label><select name="estado"><option selected>Novo</option><option></option>
-                
+            <div><label>estado:</label><select name="estado"><option selected>Novo</option><option>Semi-novo</option></select></div>
+            <div><label>alocado</label><input type="radio" name="alocado" value=true>disponivel<input type="radio" name="alocado" value=false>Não disponivel</div>
+
+        </form>
     </center>
-    </body>
+</body>
 </html>

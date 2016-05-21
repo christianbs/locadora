@@ -17,6 +17,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -50,6 +52,18 @@ public class DiscoDAOImpl implements DiscoDAO {
             throw new ExcecaoAcessoDados(ex);
         }
         return discos;
+    }
+    @Override
+    public Disco criar(Disco disco) throws ExcecaoAcessoDados{
+        String sql = "INSERT INTO disco (id_filme, estado, alocado) VALUES (?,?,?)";
+        try{
+            PreparedStatement ps = conexao.getConnection().prepareStatement(sql);
+            
+            ps.setString(2, String.valueOf(disco.getEstado()));
+            
+        } catch (SQLException ex) {
+            throw new ExcecaoAcessoDados(ex);
+        }
     }
     
 }
