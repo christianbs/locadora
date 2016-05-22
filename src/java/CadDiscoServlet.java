@@ -1,38 +1,48 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+import br.com.locadora.constante.EstadoConservacao;
+import br.com.locadora.dados.DiscoDAO;
 import br.com.locadora.dados.FilmeDAO;
+import br.com.locadora.dados.impl.DiscoDAOImpl;
 import br.com.locadora.dados.impl.FilmeDAOImpl;
+import br.com.locadora.entidade.Disco;
+import br.com.locadora.entidade.Filme;
+import br.com.locadora.excessao.ExcecaoAcessoDados;
+import br.com.locadora.excessao.ExcecaoNegocio;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Murilo
- */
 public class CadDiscoServlet extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response){
-        
-        int id_filme = Integer.parseInt(request.getParameter("id_filme"));
-        String estado = request.getParameter("estado");
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ExcecaoNegocio, IOException{
+        long id_filme = Long.parseLong(request.getParameter("id_filme"));
+        EstadoConservacao estado = EstadoConservacao.recuperarEstadoConservacao(request.getParameter("estado"));
         boolean alocado = Boolean.parseBoolean(request.getParameter("alocado"));
+        FilmeDAO fdao = new FilmeDAOImpl();
+        DiscoDAO ddao = new DiscoDAOImpl();
+        Filme f;
+        Disco d;
+        try {
+            f = fdao.buscarPeloId(id_filme);
+        } catch (ExcecaoAcessoDados ex) {
+            throw new ExcecaoNegocio(ex.getException());
+        }
+        if(f != null){
+            d = new Disco(alocado, f, estado);
+            try {
+                ddao.criar(d);
+                PrintWriter saida = response.getWriter();
+                saida.println("alert('Disco criado com sucesso!')");
+            } catch (ExcecaoAcessoDados ex) {
+                throw new ExcecaoNegocio(ex.getException());
+            }
+        }
+        RequestDispatcher view = request.getRequestDispatcher("index.html");
+      
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -47,44 +57,5 @@ public class CadDiscoServlet extends HttpServlet {
             out.println("</html>");
         }
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }

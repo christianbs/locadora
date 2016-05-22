@@ -54,7 +54,7 @@ public class DiscoDAOImpl implements DiscoDAO {
         return discos;
     }
     @Override
-    public Disco criar(Disco disco) throws ExcecaoAcessoDados{
+    public void criar(Disco disco) throws ExcecaoAcessoDados{
         String sql = "INSERT INTO disco (id_filme, estado, alocado) VALUES (?,?,?)";
         try{
             PreparedStatement ps = conexao.getConnection().prepareStatement(sql);

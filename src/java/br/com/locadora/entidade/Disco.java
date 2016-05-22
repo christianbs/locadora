@@ -18,7 +18,6 @@ public class Disco {
     private boolean alocado;
     private Filme filme;
     private EstadoConservacao estado;
-    private int id_filme;
 
     public long getId() {
         return id;
@@ -27,6 +26,16 @@ public class Disco {
     public void setId(long id) {
         this.id = id;
     }
+    public Disco(){
+        
+    }
+
+    public Disco(boolean alocado, Filme filme, EstadoConservacao estado) {
+        this.alocado = alocado;
+        this.filme = filme;
+        this.estado = estado;
+    }
+    
 
     public boolean isAlocado() {
         return alocado;

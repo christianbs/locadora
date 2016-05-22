@@ -17,6 +17,6 @@ import java.util.List;
 public interface DiscoDAO {
 
     List<Disco> listarPorFilme(Filme filme) throws ExcecaoAcessoDados;
-    Disco criar(Disco disco) throws ExcecaoAcessoDados;
+    void criar(Disco disco) throws ExcecaoAcessoDados;
 
 }
