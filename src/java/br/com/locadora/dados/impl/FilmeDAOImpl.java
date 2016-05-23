@@ -10,10 +10,12 @@ import br.com.locadora.entidade.Filme;
 import br.com.locadora.excessao.ExcecaoAcessoDados;
 import br.com.locadora.util.Conexao;
 import br.com.locadora.util.ConexaoJavaDb;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -64,6 +66,21 @@ public class FilmeDAOImpl implements FilmeDAO {
         return filme;
         }catch (SQLException ex) {
             throw new ExcecaoAcessoDados(ex);
+        }
+    }
+    @Override
+    public void inserirFilme(Filme filme) throws ExcecaoAcessoDados {
+        try {
+            String sql = "INSERT INTO Filme (ano, categoria, diretor, titulo) values (?, ?, ?, ?, ?)";
+            PreparedStatement ps = conexao.getConnection().prepareStatement(sql);
+            ps.setLong(1, filme.getId());
+            ps.setInt(2, filme.getAno());
+            ps.setString(3, filme.getTitulo());
+            ps.setString(4, filme.getDiretor());
+            ps.setString(5, filme.getCategoria());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new ExcecaoAcessoDados(e);
         }
     }
 
