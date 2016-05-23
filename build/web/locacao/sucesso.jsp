@@ -1,5 +1,5 @@
 <%-- 
-    Document   : incluir-locacao.jsp
+    Document   : selecionar-filme.jsp
     Created on : 19/05/2016, 08:17:06
     Author     : christian
 --%>
@@ -20,23 +20,11 @@
         <section class="col-sm-4">
         </section>
         <section class="col-sm-4 container">
-            <h2>Locação</h2>
-            <form role="form" action="../incluirLocacao" method="post">
-                <div class="form-group">
-                    <label for="filme" >Filme:</label>
-                    <select id="filme" class="form-control">
-                        <option>Selecione</option>
-                        <c:forEach var="filme" items="${filmeControle.listarFilmes()}" >
-                            <option value="${filme.id}">${filme.titulo}</option>
-                        </c:forEach>
-                    </select>
-                </div>             
-                <button type="submit" class="btn btn-default">Continuar</button>
-            </form>
+            <h2>Sucesso</h2>
         </section>
         <section class="col-sm-4">
         </section>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>     
     </body>
 </html>

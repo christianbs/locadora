@@ -14,6 +14,6 @@ import br.com.locadora.excessao.ExcecaoAcessoDados;
  */
 public interface LocacaoDAO {
 
-    public void inserirLocacao(Locacao locacao) throws ExcecaoAcessoDados;
+    long inserirLocacao(Locacao locacao) throws ExcecaoAcessoDados;
 
 }

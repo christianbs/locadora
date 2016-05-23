@@ -5,9 +5,13 @@
  */
 package br.com.locadora.negocio;
 
+import br.com.locadora.dados.DiscoLocacaoDAO;
 import br.com.locadora.dados.LocacaoDAO;
+import br.com.locadora.dados.impl.DiscoLocacaoDAOImpl;
 import br.com.locadora.dados.impl.LocacaoDAOImpl;
 import br.com.locadora.entidade.Cliente;
+import br.com.locadora.entidade.Disco;
+import br.com.locadora.entidade.DiscoLocacao;
 import br.com.locadora.entidade.Locacao;
 import br.com.locadora.excessao.ExcecaoAcessoDados;
 import br.com.locadora.excessao.ExcecaoNegocio;
@@ -19,18 +23,26 @@ import java.time.Instant;
  * @author christian
  */
 public class LocacaoNegocio {
-
-    private LocacaoDAO dao;
-
+    
+    private final LocacaoDAO locacaoDao;
+    private final DiscoLocacaoDAO discoLocacaoDao;
+    
     public LocacaoNegocio() {
-        dao = new LocacaoDAOImpl();
+        locacaoDao = new LocacaoDAOImpl();
+        discoLocacaoDao = new DiscoLocacaoDAOImpl();
     }
-
-    public void inserirLocacao(Locacao locacao) throws ExcecaoNegocio {
+    
+    public void inserirLocacao(Locacao locacao, long idDisco) throws ExcecaoNegocio {
         try {
-            dao.inserirLocacao(locacao);
+            long idLocacao = locacaoDao.inserirLocacao(locacao);
+            locacao.setId(idLocacao);
+            DiscoLocacao discoLocacao = new DiscoLocacao();
+            Disco disco = new Disco();
+            disco.setId(idDisco);
+            discoLocacao.setDisco(disco);
+            discoLocacao.setLocacao(locacao);
+            discoLocacaoDao.inserirDiscoLocacao(discoLocacao);
         } catch (ExcecaoAcessoDados e) {
-            e.getException().printStackTrace();
             throw new ExcecaoNegocio(e);
         }
     }
@@ -46,9 +58,9 @@ public class LocacaoNegocio {
         Instant devolucao = Instant.now();
         locacao.setDataDevolucao(devolucao);
         try {
-            negocio.inserirLocacao(locacao);
+            negocio.inserirLocacao(locacao, 3);
         } catch (ExcecaoNegocio ex) {
         }
     }
-
+    
 }

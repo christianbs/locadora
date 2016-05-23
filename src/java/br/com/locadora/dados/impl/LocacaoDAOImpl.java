@@ -27,7 +27,7 @@ public class LocacaoDAOImpl implements LocacaoDAO {
     }
 
     @Override
-    public void inserirLocacao(Locacao locacao) throws ExcecaoAcessoDados {
+    public long inserirLocacao(Locacao locacao) throws ExcecaoAcessoDados {
         try {
             String sql = "insert into locacao(id_cliente, retirada, devolucao, valor, multa) values(?, ?, ?, ?, ?)";
             PreparedStatement ps = conexao.getConnection().prepareStatement(sql);
@@ -36,7 +36,8 @@ public class LocacaoDAOImpl implements LocacaoDAO {
             ps.setDate(3, new java.sql.Date(Date.from(locacao.getDataDevolucao()).getTime()));
             ps.setBigDecimal(4, locacao.getValor());
             ps.setBigDecimal(5, locacao.getMulta());
-            ps.executeUpdate();
+            long id = ps.executeUpdate();
+            return id;
         } catch (SQLException e) {
             throw new ExcecaoAcessoDados(e);
         }

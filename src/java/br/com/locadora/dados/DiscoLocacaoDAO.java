@@ -5,10 +5,15 @@
  */
 package br.com.locadora.dados;
 
+import br.com.locadora.entidade.DiscoLocacao;
+import br.com.locadora.excessao.ExcecaoAcessoDados;
+
 /**
  *
  * @author christian
  */
 public interface DiscoLocacaoDAO {
+
+    void inserirDiscoLocacao(DiscoLocacao discoLocacao) throws ExcecaoAcessoDados;
 
 }

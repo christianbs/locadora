@@ -12,8 +12,6 @@ import br.com.locadora.entidade.Filme;
 import br.com.locadora.excessao.ExcecaoAcessoDados;
 import br.com.locadora.excessao.ExcecaoNegocio;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -34,7 +32,7 @@ public class DiscoNegocio {
             throw new ExcecaoNegocio(ex.getException());
         }
     }
-    
+
     public static void main(String[] args) {
         Filme filme = new Filme();
         filme.setId(1);
@@ -44,7 +42,6 @@ public class DiscoNegocio {
             discos.stream().forEach((disco) -> {
                 System.out.println(disco.getId());
             });
-            
         } catch (ExcecaoNegocio ex) {
             ex.getException().printStackTrace();
         }
