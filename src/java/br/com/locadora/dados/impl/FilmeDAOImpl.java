@@ -84,4 +84,16 @@ public class FilmeDAOImpl implements FilmeDAO {
         }
     }
 
+    @Override
+    public void deletarFilme(Filme id) throws ExcecaoAcessoDados {
+        try {
+            String sql = "DELETE FROM Filme WHERE id=?";
+            PreparedStatement ps = conexao.getConnection().prepareStatement(sql);
+            ps.setLong(1, id.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new ExcecaoAcessoDados(e);
+        }
+    }
+
 }

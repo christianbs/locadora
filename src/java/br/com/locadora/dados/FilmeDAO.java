@@ -18,5 +18,5 @@ public interface FilmeDAO {
     List<Filme> listar() throws ExcecaoAcessoDados;
     Filme buscarPeloId(long id) throws ExcecaoAcessoDados;
     public void inserirFilme(Filme filme) throws ExcecaoAcessoDados;
-
+    public void deletarFilme(Filme id) throws ExcecaoAcessoDados;
 }
