@@ -14,10 +14,12 @@ and open the template in the editor.
     <center>
         <h1>Cadastro de disco</h1>
         <form method="POST" action="/CadDiscoServlet">
-            <div><label>id do filme:</label><input type="text" name="id_filme"/></div>
-            <div><label>estado:</label><select name="estado"><option selected>Novo</option><option>Semi-novo</option></select></div>
-            <div><label>alocado</label><input type="radio" name="alocado" value=true>disponivel<input type="radio" name="alocado" value=false>Não disponivel</div>
-
+            <table>
+                <tr><td><div><label>id do filme:</label></td><td><input type="text" name="id_filme"/></div></td>
+                <tr><td><div><label>estado:</label></td><td><select name="estado"><option selected value="MUITO_NOVO">Muito Novo</option><option value="QUASE_NOVO">Quase Novo</option><option VALUE="POUCO_RISCADO">Pouco Riscado</option><option VALUE="MUITO_RISCADO">Muito Riscado</option></select></div></td></tr>  
+                <tr><td><div><label>alocado</label></td><td><input type="radio" name="alocado" value=true selected >disponivel<input type="radio" name="alocado" value=false>Não disponivel</div></td></tr>
+                <tr><td><input type="submit" value="Confirmar"</td></tr>
+            </table>
         </form>
     </center>
 </body>

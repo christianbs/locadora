@@ -27,7 +27,7 @@ public class FilmeDAOImpl implements FilmeDAO {
     private final Conexao conexao;
 
     public FilmeDAOImpl() {
-        conexao = new ConexaoJavaDb("root", "102030", "localhost", 1527, "locadora");
+        conexao = new ConexaoJavaDb("root", "102030", "localhost", 1527, "locadora2");
     }
 
     @Override

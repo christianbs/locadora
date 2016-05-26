@@ -18,5 +18,8 @@ public interface DiscoDAO {
 
     List<Disco> listarPorFilme(Filme filme) throws ExcecaoAcessoDados;
     void criar(Disco disco) throws ExcecaoAcessoDados;
-
+    void atualizar(Disco disco) throws ExcecaoAcessoDados;
+    List<Disco> listar() throws ExcecaoAcessoDados;
+    void apagar(Disco disco) throws ExcecaoAcessoDados;
+    Disco buscar(long id) throws ExcecaoAcessoDados;
 }
