@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>adicionar disco</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>Adicionar um novo disco</h1>
+        <form method="POST" action="FrontControllerServlet">
+            <input type="hidden" name="controle" value="adicionar" />
+            <p>id do filme: <input type="text" name="id_filme"/></p>
+            <p>Estado do disco: <select name="estado"><option selected value="MUITO_NOVO">Muito Novo</option><option value="QUASE_NOVO">Quase Novo</option><option VALUE="POUCO_RISCADO">Pouco Riscado</option><option VALUE="MUITO_RISCADO">Muito Riscado</option></select></p>
+            <p>Disponibilidade: <input type="radio" name="alocado" value=true>disponivel<input type="radio" name="alocado" value=false>Não disponivel</p>
+            <p><input type="submit" value="Adicionar" /></p>
+            <p><a href="FrontControllerServlet?controle=listar">Voltar para a lista de usuários</a></p>
+        </form>
+    </body>
+</html>

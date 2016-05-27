@@ -18,6 +18,7 @@ public class Disco {
     private boolean alocado;
     private Filme filme;
     private EstadoConservacao estado;
+    private long idFilme;
 
     public long getId() {
         return id;
@@ -25,6 +26,20 @@ public class Disco {
 
     public void setId(long id) {
         this.id = id;
+    }
+    public Disco(){
+        
+    }
+
+    public Disco(boolean alocado, Filme filme, EstadoConservacao estado) {
+        this.alocado = alocado;
+        this.filme = filme;
+        this.estado = estado;
+    }
+    public Disco(long id, boolean alocado, long idFilme, EstadoConservacao estado){
+        this.alocado = alocado;
+        this.idFilme = idFilme;
+        this.estado = estado;
     }
 
     public boolean isAlocado() {
@@ -51,6 +66,15 @@ public class Disco {
         this.estado = estado;
     }
 
+    public long getIdFilme() {
+        return idFilme;
+    }
+
+    public void setIdFilme(long idFilme) {
+        this.idFilme = idFilme;
+    }
+    
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -60,7 +84,6 @@ public class Disco {
         hash = 89 * hash + Objects.hashCode(this.estado);
         return hash;
     }
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -87,5 +110,6 @@ public class Disco {
         }
         return true;
     }
+    
 
 }

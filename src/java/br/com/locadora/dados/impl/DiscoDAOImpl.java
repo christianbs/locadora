@@ -17,6 +17,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,6 +30,9 @@ public class DiscoDAOImpl implements DiscoDAO {
     
     public DiscoDAOImpl() {
         conexao = new ConexaoJavaDb("root", "102030", "localhost", 1527, "locadora");
+    }
+    public DiscoDAOImpl(Conexao conexao) throws ExcecaoAcessoDados{
+        this.conexao = conexao;
     }
     
     @Override
@@ -51,5 +56,84 @@ public class DiscoDAOImpl implements DiscoDAO {
         }
         return discos;
     }
+    @Override
+    public void criar(Disco disco) throws ExcecaoAcessoDados{
+        String sql = "INSERT INTO disco (id_filme, estado, alocado) VALUES (?,?,?)";
+        try{
+            PreparedStatement ps = conexao.getConnection().prepareStatement(sql);
+            
+            ps.setString(2, String.valueOf(disco.getEstado()));
+            
+        } catch (SQLException ex) {
+            throw new ExcecaoAcessoDados(ex);
+        }
+    }
     
+    @Override
+    public void atualizar(Disco disco) throws ExcecaoAcessoDados {
+                    String sql = "UPDATE DISCO set id_filme=?, estado=?, alocado=? where id=?";
+        try {
+            PreparedStatement ps = conexao.getConnection().prepareStatement(sql);
+            ps.setLong(1, disco.getIdFilme());
+            ps.setObject(2, disco.getEstado());
+            ps.setBoolean(3, disco.isAlocado());
+            ps.setLong(4, disco.getId());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            throw new ExcecaoAcessoDados(ex);
+        }
+    }
+
+    @Override
+    public List<Disco> listar() throws ExcecaoAcessoDados {
+        List<Disco> discos = new ArrayList<>();
+        String sql = "SELECT * FROM disco";
+        try {
+            PreparedStatement ps = conexao.getConnection().prepareStatement(sql);
+            ResultSet result = ps.executeQuery();
+            while(result.next()) {
+                long id = result.getLong("id");
+                long idFilme = result.getLong("id_filme");
+                EstadoConservacao estado = EstadoConservacao.recuperarEstadoConservacao(result.getString("estado"));
+                boolean alocado = result.getBoolean("alocado");
+                Disco d = new Disco(id, alocado, idFilme, estado);
+                discos.add(d);
+            }
+        } catch (SQLException ex) {
+            throw new ExcecaoAcessoDados(ex);
+        }
+        return discos;
+    }
+
+    @Override
+    public void apagar(Disco disco) throws ExcecaoAcessoDados {
+        String sql = "DELETE FROM disco where id = ?";
+        try {
+            PreparedStatement ps = conexao.getConnection().prepareStatement(sql);
+            ps.setLong(1, disco.getId());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            throw new ExcecaoAcessoDados(ex);
+        }    
+    }
+    @Override
+    public Disco buscar(long id) throws ExcecaoAcessoDados{
+        String sql = "SELCT * from disco where id=?";
+        Disco d = null;
+        try{
+            PreparedStatement ps = conexao.getConnection().prepareStatement(sql);
+                    ps.setLong(1, id);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                long idd = rs.getLong("id");
+                long idFilme = rs.getLong("id_filme");
+                EstadoConservacao estado = EstadoConservacao.recuperarEstadoConservacao(rs.getString("estado"));
+                boolean alocado = rs.getBoolean("alocado");
+                d = new Disco(idd, alocado, idFilme, estado);
+            }
+        } catch (SQLException ex) {
+            throw new ExcecaoAcessoDados(ex);
+        }
+        return d;
+    }
 }
