@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.locadora.controle;
+package br.com.locadora.controle.locacao;
 
 import br.com.locadora.entidade.Cliente;
 import br.com.locadora.entidade.Locacao;
@@ -12,9 +12,6 @@ import br.com.locadora.negocio.LocacaoNegocio;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.time.temporal.TemporalUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
