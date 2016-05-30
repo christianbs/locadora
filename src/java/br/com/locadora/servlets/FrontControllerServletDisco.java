@@ -64,13 +64,10 @@ public class FrontControllerServletDisco extends HttpServlet {
                 break;
         }
 
-        // inicialização
         controle.init(request);
 
-        // execução
         controle.execute();
 
-        // encaminhamento ou redirecionamento para uma página
         if (controle.getReturnType() == ReturnType.FORWARD) {
             RequestDispatcher rd;
             rd = request.getRequestDispatcher(controle.getReturnPage());

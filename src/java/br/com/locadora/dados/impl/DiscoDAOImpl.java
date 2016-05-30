@@ -29,7 +29,7 @@ public class DiscoDAOImpl implements DiscoDAO {
     private final Conexao conexao;
     
     public DiscoDAOImpl() {
-        conexao = new ConexaoJavaDb("root", "102030", "localhost", 1527, "locadora");
+        conexao = new ConexaoJavaDb("app", "app", "localhost", 1527, "LOCADORA");
     }
     public DiscoDAOImpl(Conexao conexao) throws ExcecaoAcessoDados{
         this.conexao = conexao;

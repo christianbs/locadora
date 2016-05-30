@@ -15,7 +15,7 @@ public class SessionUtils {
         Conexao conexao;
         conexao = (Conexao) session.getAttribute("conexaoSessao");
         if (conexao == null) {
-            conexao = new ConexaoJavaDb("root", "", "localhost", 1527, "locadora");
+            conexao = new ConexaoJavaDb("app", "app", "localhost", 1527, "LOCADORA");
             session.setAttribute("conexaoSessao", conexao);
         }
         return conexao;
