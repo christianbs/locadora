@@ -26,7 +26,7 @@ public class AdicionarDiscoController implements ControllerInterface{
         EstadoConservacao estado = EstadoConservacao.recuperarEstadoConservacao(request.getParameter("estado"));
         boolean alocado = Boolean.parseBoolean(request.getParameter("alocado"));
         disco = new Disco(0, alocado, idFilme, estado);
-        pagina = "disco/adicionar_disco.html";
+        pagina = "adicionar_disco.html";
         this.request = request;
     }
 

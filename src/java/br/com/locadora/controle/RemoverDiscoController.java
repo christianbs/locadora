@@ -21,8 +21,8 @@ public class RemoverDiscoController implements ControllerInterface {
     
     @Override
     public void init(HttpServletRequest request) {
-        long Id = Long.parseLong(request.getParameter("id"));
-         pagina = "FrontControllerServlet?controle=listar";
+        id = Long.parseLong(request.getParameter("id"));
+         pagina = "FrontControllerServletDisco?controle=listar";
          this.request = request;
     }
 

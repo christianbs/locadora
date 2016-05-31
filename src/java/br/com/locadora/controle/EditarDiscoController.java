@@ -21,8 +21,8 @@ public class EditarDiscoController implements ControllerInterface{
 
     @Override
     public void init(HttpServletRequest request) {
-        Long Id = Long.parseLong(request.getParameter("id"));
-        pagina = "disco/editar_disco.jsp";
+        id = Long.parseLong(request.getParameter("id"));
+        pagina = "editar_disco.jsp";
         this.request = request;
     }
 
@@ -34,7 +34,7 @@ public class EditarDiscoController implements ControllerInterface{
             DiscoDAO dao = SessionUtils.getDiscoDao(conexao, session);
             Disco d = dao.buscar(id);
             request.setAttribute("disco", d);
-        } catch (ExcecaoAcessoDados ex) {
+        } catch (ExcecaoAcessoDados ex){
             pagina = "erro.jsp";
         }
     }

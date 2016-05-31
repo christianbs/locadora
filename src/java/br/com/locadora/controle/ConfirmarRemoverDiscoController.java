@@ -20,8 +20,8 @@ public class ConfirmarRemoverDiscoController implements ControllerInterface{
     
     @Override
     public void init(HttpServletRequest request) {
-        long Id = Long.parseLong(request.getParameter("id"));
-        pagina = "disco/apagar_disco.jsp";
+        id = Long.parseLong(request.getParameter("id"));
+        pagina = "apagar_disco.jsp";
         this.request = request;
     }
 

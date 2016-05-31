@@ -31,6 +31,7 @@ public class SalvarDiscoController implements ControllerInterface{
             EstadoConservacao estado = EstadoConservacao.recuperarEstadoConservacao(request.getParameter("d_estado"));
             boolean alocado = Boolean.parseBoolean(request.getParameter("d_alocado"));
             disco = new Disco(id, alocado, idFilme, estado);
+             System.out.println("id do disco: " + disco.getId());
         } catch (Exception e) {
             disco = null;
         } 
@@ -48,7 +49,7 @@ public class SalvarDiscoController implements ControllerInterface{
 
             if (disco != null) {
                 dao.atualizar(disco);
-                pagina = "FrontControllerServlet?controle=listar";
+                pagina = "FrontControllerServletDisco?controle=listar";
                 retorno = ReturnType.REDIRECT;
             } 
             else {

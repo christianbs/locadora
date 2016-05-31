@@ -61,9 +61,10 @@ public class DiscoDAOImpl implements DiscoDAO {
         String sql = "INSERT INTO disco (id_filme, estado, alocado) VALUES (?,?,?)";
         try{
             PreparedStatement ps = conexao.getConnection().prepareStatement(sql);
-            
+            ps.setLong(1, disco.getIdFilme());
             ps.setString(2, String.valueOf(disco.getEstado()));
-            
+            ps.setBoolean(3, disco.isAlocado());
+            System.out.println("valor de disco " + disco.getIdFilme());
         } catch (SQLException ex) {
             throw new ExcecaoAcessoDados(ex);
         }
@@ -75,7 +76,7 @@ public class DiscoDAOImpl implements DiscoDAO {
         try {
             PreparedStatement ps = conexao.getConnection().prepareStatement(sql);
             ps.setLong(1, disco.getIdFilme());
-            ps.setObject(2, disco.getEstado());
+            ps.setString(2, String.valueOf(disco.getEstado()));
             ps.setBoolean(3, disco.isAlocado());
             ps.setLong(4, disco.getId());
             ps.executeUpdate();
@@ -118,7 +119,7 @@ public class DiscoDAOImpl implements DiscoDAO {
     }
     @Override
     public Disco buscar(long id) throws ExcecaoAcessoDados{
-        String sql = "SELCT * from disco where id=?";
+        String sql = "SELECT * from disco where id=?";
         Disco d = null;
         try{
             PreparedStatement ps = conexao.getConnection().prepareStatement(sql);

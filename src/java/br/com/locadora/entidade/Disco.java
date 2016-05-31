@@ -37,6 +37,7 @@ public class Disco {
         this.estado = estado;
     }
     public Disco(long id, boolean alocado, long idFilme, EstadoConservacao estado){
+        this.id = id;
         this.alocado = alocado;
         this.idFilme = idFilme;
         this.estado = estado;

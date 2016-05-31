@@ -41,16 +41,15 @@ public class FrontControllerServletDisco extends HttpServlet {
             throws ServletException, IOException {
         ControllerInterface controle = null;
         String nomeControle = request.getParameter("controle");
+        System.out.println("Controle: " + nomeControle);
         switch (nomeControle) {
             case "adicionar":
-                System.out.print("teste add");
                 controle = new AdicionarDiscoController();
                 break;
             case "confirma_remover":
                 controle = new ConfirmarRemoverDiscoController();
                 break;
             case "listar":
-                System.out.print("teste lista");
                 controle = new ListarDiscoController();
                 break;
             case "editar":

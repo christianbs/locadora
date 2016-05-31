@@ -20,7 +20,7 @@ public class ListarDiscoController implements ControllerInterface {
     
     @Override
     public void init(HttpServletRequest request) {
-        pagina = "disco/lista_discos.jsp";
+        pagina = "lista_discos.jsp";
         this.request = request;
     }
 
