@@ -19,4 +19,5 @@ public interface FilmeDAO {
     Filme buscarPeloId(long id) throws ExcecaoAcessoDados;
     public void inserirFilme(Filme filme) throws ExcecaoAcessoDados;
     public void deletarFilme(Filme id) throws ExcecaoAcessoDados;
+    void atualizarFilme(Filme filme) throws ExcecaoAcessoDados;
 }

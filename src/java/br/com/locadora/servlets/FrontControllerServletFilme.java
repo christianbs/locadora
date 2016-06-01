@@ -5,28 +5,20 @@
  */
 package br.com.locadora.servlets;
 
-import br.com.locadora.controle.AdicionarDiscoController;
-import br.com.locadora.controle.ConfirmarRemoverDiscoController;
+import br.com.locadora.controle.AdicionarFilmeController;
+import br.com.locadora.controle.ConfirmarRemoverFilmeController;
 import br.com.locadora.controle.ControllerInterface;
-import br.com.locadora.controle.ControllerInterface.ReturnType;
-import br.com.locadora.controle.EditarDiscoController;
-import br.com.locadora.controle.ListarDiscoController;
-import br.com.locadora.controle.RemoverDiscoController;
-import br.com.locadora.controle.SalvarDiscoController;
+import br.com.locadora.controle.EditarFilmeController;
+import br.com.locadora.controle.ListarFilmeController;
+import br.com.locadora.controle.RemoverFilmeController;
+import br.com.locadora.controle.SalvarFilmeController;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-/**
- *
- * @author Murilo
- */
-@WebServlet(name = "FrontControllerServletDisco", urlPatterns = {"/FrontControllerServletDisco"})
-public class FrontControllerServletDisco extends HttpServlet {
+public class FrontControllerServletFilme extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,36 +33,36 @@ public class FrontControllerServletDisco extends HttpServlet {
             throws ServletException, IOException {
         ControllerInterface controle = null;
         String nomeControle = request.getParameter("controle");
+        System.out.println("Controle: " + nomeControle);
         switch (nomeControle) {
             case "adicionar":
-                controle = new AdicionarDiscoController();
+                controle = new AdicionarFilmeController();
                 break;
             case "confirma_remover":
-                controle = new ConfirmarRemoverDiscoController();
+                controle = new ConfirmarRemoverFilmeController();
                 break;
             case "listar":
-                controle = new ListarDiscoController();
+                controle = new ListarFilmeController();
                 break;
             case "editar":
-                controle = new EditarDiscoController();
+                controle = new EditarFilmeController();
                 break;
             case "remover":
-                controle = new RemoverDiscoController();
+                controle = new RemoverFilmeController();
                 break;
             case "salvar":
-                controle = new SalvarDiscoController();
+                controle = new SalvarFilmeController();
                 break;
         }
 
         controle.init(request);
-
         controle.execute();
 
-        if (controle.getReturnType() == ReturnType.FORWARD) {
+        if (controle.getReturnType() == ControllerInterface.ReturnType.FORWARD) {
             RequestDispatcher rd;
             rd = request.getRequestDispatcher(controle.getReturnPage());
             rd.forward(request, response);
-        } else if (controle.getReturnType() == ReturnType.REDIRECT) {
+        } else if (controle.getReturnType() == ControllerInterface.ReturnType.REDIRECT) {
             response.sendRedirect(controle.getReturnPage());
         }
     }
@@ -103,6 +95,7 @@ public class FrontControllerServletDisco extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
+
     /**
      * Returns a short description of the servlet.
      *

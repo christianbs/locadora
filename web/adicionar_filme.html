@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Adicionar filme</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>Adicionar filme</h1>
+        <form method="POST" action="FrontControllerServletFilme">
+            <input type="hidden" name="controle" value="adicionar"/>
+            <p>Titulo: <input type="text" name="titulo" /></p>
+            <p>Ano: <input type="text" name="ano" /></p>
+            <p>Diretor: <input type="text" name="diretor" /></p>
+            <p>Categoria: <input type="text" name="categoria" /></p>
+            <p><input type="submit" value="Adicionar"/></p>
+            <p><a href="FrontControllerServletFilme?controle=listar"> Voltar para a lista de filmes</p>
+        </form>
+    </body>
+</html>

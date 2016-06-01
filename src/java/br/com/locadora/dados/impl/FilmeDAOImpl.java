@@ -27,34 +27,41 @@ public class FilmeDAOImpl implements FilmeDAO {
     private final Conexao conexao;
 
     public FilmeDAOImpl() {
-        conexao = new ConexaoJavaDb("root", "102030", "localhost", 1527, "locadora2");
+        conexao = new ConexaoJavaDb("app", "app", "localhost", 1527, "locadora");
+    }
+
+    public FilmeDAOImpl(Conexao conexao) throws ExcecaoAcessoDados {
+        this.conexao = conexao;
     }
 
     @Override
     public List<Filme> listar() throws ExcecaoAcessoDados {
+        List<Filme> filmes = new ArrayList<>();
+        String sql = "select * from filme";
+        System.out.println("ola");
         try {
-            List<Filme> filmes = new ArrayList();
-            String sql = "select * from filme";
-            Statement st = conexao.getConnection().createStatement();
-            ResultSet rs = st.executeQuery(sql);
+            PreparedStatement st = conexao.getConnection().prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Filme filme = new Filme();
-                filme.setAno(rs.getDate("ano").getYear());
+                filme.setAno(rs.getInt("ano"));
                 filme.setCategoria(rs.getString("categoria"));
                 filme.setDiretor(rs.getString("diretor"));
                 filme.setId(rs.getLong("id"));
                 filme.setTitulo(rs.getString("titulo"));
                 filmes.add(filme);
             }
-            return filmes;
+            
         } catch (SQLException ex) {
             throw new ExcecaoAcessoDados(ex);
         }
+        return filmes;
     }
+
     @Override
     public Filme buscarPeloId(long id) throws ExcecaoAcessoDados {
         Filme filme = null;
-        try{
+        try {
             String sql = "select * from filme WHERE id=?";
             Statement st = conexao.getConnection().createStatement();
             ResultSet rs = st.executeQuery(sql);
@@ -63,11 +70,12 @@ public class FilmeDAOImpl implements FilmeDAO {
             filme.setCategoria(rs.getString("categoria"));
             filme.setDiretor(rs.getString("diretor"));
             filme.setTitulo(rs.getString("titulo"));
-        return filme;
-        }catch (SQLException ex) {
+            return filme;
+        } catch (SQLException ex) {
             throw new ExcecaoAcessoDados(ex);
         }
     }
+
     @Override
     public void inserirFilme(Filme filme) throws ExcecaoAcessoDados {
         try {
@@ -93,6 +101,22 @@ public class FilmeDAOImpl implements FilmeDAO {
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new ExcecaoAcessoDados(e);
+        }
+    }
+
+    @Override
+    public void atualizarFilme(Filme filme) throws ExcecaoAcessoDados {
+        String sql = "UPDATE Filme set ano=?, categoria=?, diretor=?, titulo=? where id=?";
+        try {
+            PreparedStatement ps = conexao.getConnection().prepareStatement(sql);
+            ps.setInt(1, filme.getAno());
+            ps.setString(2, filme.getCategoria());
+            ps.setString(3, filme.getDiretor());
+            ps.setString(4, filme.getTitulo());
+            ps.setLong(5, filme.getId());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            throw new ExcecaoAcessoDados(ex);
         }
     }
 

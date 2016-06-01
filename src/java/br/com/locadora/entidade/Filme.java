@@ -10,6 +10,16 @@ public class Filme {
     private String diretor;
     private String categoria;
 
+    public Filme(){}
+    public Filme(long id, int ano, String titulo, String diretor, String categoria) {
+        this.id = id;
+        this.ano = ano;
+        this.titulo = titulo;
+        this.diretor = diretor;
+        this.categoria = categoria;
+    }
+
+    
     public long getId() {
         return id;
     }
